@@ -1,5 +1,5 @@
 package certificate_interactor;
 
-public interface TicketDBGateway {
+public class Certificate {
 
 }
