@@ -1,5 +1,7 @@
 package certificate;
 
-public interface TicketDBGateway {
+import java.sql.SQLException;
 
+public interface TicketDBGateway {
+	public Certificate getCertificateById(String id) throws SQLException, ClassNotFoundException;
 }

@@ -1,9 +1,6 @@
-package db;
+package certificate;
 
 public class Config {
-	public static final String dbUsername = "root";
-	public static final String dbPassword = "root";
-	
 	public static final int ONEWAY_TYPE = 1;
 	public static final int HOUR24_TYPE = 2;
 	public static final int PREPAID_TYPE = 3;

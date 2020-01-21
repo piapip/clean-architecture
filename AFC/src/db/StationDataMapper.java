@@ -9,6 +9,7 @@ import station.Station;
 import station.StationDBGateway;
 
 public class StationDataMapper implements StationDBGateway {
+	
 	@Override
 	public Station getStationById(int id) throws ClassNotFoundException, SQLException {
 		Connection connection = ConnectToMySQL.getInformation("station_system");
