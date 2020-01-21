@@ -1,5 +1,7 @@
 package station;
 
-public interface StationDBGateway {
+import java.sql.SQLException;
 
+public interface StationDBGateway {
+	public Station getStationById(int id) throws ClassNotFoundException, SQLException;
 }

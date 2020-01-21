@@ -1,5 +1,7 @@
 package interactor;
 
-public interface StationDistanceInterface {
+import java.sql.SQLException;
 
+public interface StationDistanceInterface {
+	public double getDistance(int startingStationId, int endingStationId) throws ClassNotFoundException, SQLException;
 }
