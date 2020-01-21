@@ -2,10 +2,15 @@ package station;
 
 import java.sql.SQLException;
 
-import db.StationDataMapper;
 import interactor.StationDistanceInterface;
 
 public class StationDistanceByZone implements StationDistanceInterface{
+
+	private StationDBGateway gw;
+	
+	public StationDistanceByZone(StationDBGateway gw) {
+		this.gw = gw;
+	}
 	
 	@Override
 	public double getDistance(int startingStationId, int endingStationId) throws ClassNotFoundException, SQLException {
@@ -13,7 +18,6 @@ public class StationDistanceByZone implements StationDistanceInterface{
 	}
 	
 	private int getZone(int stationID) throws ClassNotFoundException, SQLException {
-		StationDBGateway gw = new StationDataMapper();
 		Station station = gw.getStationById(stationID);
 		if(station.getId() >= 0 && station.getId() <= 3) {
 			return Config.A;
