@@ -1,6 +1,8 @@
 package interactor;
 
+import java.sql.SQLException;
+
 public interface RequirementInterface {
-	public boolean passEntering(String certificateId);
-	public boolean passExiting(String certificateId, double fee);
+	public String passEntering(String certificateId) throws ClassNotFoundException, SQLException;
+	public String passExiting(String certificateId, double fee) throws ClassNotFoundException, SQLException;
 }
