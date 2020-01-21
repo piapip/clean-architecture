@@ -1,6 +1,6 @@
 package certificate;
 
-public class Certificate {
+public abstract class Certificate {
 	private String id;
 	private int type;
 	LastHistory lastHistory;
