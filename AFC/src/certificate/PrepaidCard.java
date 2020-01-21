@@ -2,8 +2,14 @@ package certificate;
 
 public class PrepaidCard extends Certificate{
 
-	public PrepaidCard(String id, int type, LastHistory history) {
-		super(id, type, history);
+	private double balance;
+	
+	public PrepaidCard(String id, LastHistory history, double balance) {
+		super(id, Config.PREPAID_TYPE, history);
+		this.balance = balance;
 	}
 
+	public double getBalance() {
+		return this.balance;
+	}
 }

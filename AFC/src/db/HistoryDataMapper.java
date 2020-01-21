@@ -9,7 +9,7 @@ import certificate.LastHistory;
 
 public class HistoryDataMapper {
 	
-	public LastHistory getLastHistoryByCertificateId(String id) throws SQLException, ClassNotFoundException {
+	protected LastHistory getLastHistoryByCertificateId(String id) throws SQLException, ClassNotFoundException {
 		Connection connection = ConnectToMySQL.getInformation("transaction_history");
 		Statement statement = connection.createStatement();
 		String sql = "Select * from transactions WHERE certificateId='" + id + "' ORDER BY status ASC  \r\n" + 

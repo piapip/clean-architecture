@@ -9,7 +9,7 @@ import certificate.PrepaidCard;
 import certificate.TicketDBGateway;
 
 public class PrepaidCardDataMapper implements TicketDBGateway{
-
+	
 	@Override
 	public PrepaidCard getCertificateById(String id) throws SQLException, ClassNotFoundException {
 		Connection connection = ConnectToMySQL.getInformation("travelling_certificate");
@@ -20,8 +20,27 @@ public class PrepaidCardDataMapper implements TicketDBGateway{
 		if (rs != null) {
 			while(rs.next()) {
 				int type = rs.getInt(2);
+				if (type != Config.PREPAID_TYPE) {
+					System.out.println("This is not a prepaid card!");
+					return null;
+				}
 				HistoryDataMapper historyMapper = new HistoryDataMapper();
-				result = new PrepaidCard(id, type, historyMapper.getLastHistoryByCertificateId(id));
+				result = new PrepaidCard(id, historyMapper.getLastHistoryByCertificateId(id), getBalance(id));
+			}
+		}
+		connection.close();
+		return result;
+	}
+	
+	private double getBalance(String id) throws SQLException, ClassNotFoundException {
+		Connection connection = ConnectToMySQL.getInformation("travelling_certificate");
+		Statement statement = connection.createStatement();
+		String sql = "Select * from prepaid_card WHERE id='" + id + "'";
+		ResultSet rs = statement.executeQuery(sql);
+		double result = 0;
+		if(rs != null) {
+			while(rs.next()){
+				result = rs.getDouble(2);
 			}
 		}
 		connection.close();
