@@ -20,7 +20,7 @@ public class RequirementOnewayTicket implements RequirementInterface{
 	public String passEntering(String certificateId) throws ClassNotFoundException, SQLException {
 		OnewayTicket ticket = (OnewayTicket) ticketGW.getCertificateById(certificateId);
 		if (ticket == null) return "Ticket doesn't exist. Please buy a new one.";
-		if(historyGW.getLastHistoryByCertificateId(certificateId).getStatus() == Config.EXPIRED) {
+		if(ticket.getStatus() == Config.EXPIRED) {
 			return "The ticket is already used.";
 		}
 		if(historyGW.getLastHistoryByCertificateId(certificateId).getStatus() != Config.UNUSED) {
@@ -33,7 +33,7 @@ public class RequirementOnewayTicket implements RequirementInterface{
 	public String passExiting(String certificateId, double fee) throws ClassNotFoundException, SQLException {
 		OnewayTicket ticket = (OnewayTicket) ticketGW.getCertificateById(certificateId);
 		if (ticket == null) return "Ticket doesn't exist. Please buy a new one.";
-		if(historyGW.getLastHistoryByCertificateId(certificateId).getStatus() == Config.EXPIRED) {
+		if(ticket.getStatus() == Config.EXPIRED) {
 			return "The ticket is already used.";
 		}
 		if (historyGW.getLastHistoryByCertificateId(certificateId).getStatus() != Config.PENDING) {

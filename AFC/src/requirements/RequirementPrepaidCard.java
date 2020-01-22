@@ -21,6 +21,10 @@ public class RequirementPrepaidCard implements RequirementInterface {
 	public String passEntering(String certificateId) throws ClassNotFoundException, SQLException {
 		PrepaidCard card = (PrepaidCard) cardGateWay.getCertificateById(certificateId);
 		if (card == null) return "Card doesn't exist. Please buy a new one.";
+		if (card.getBalance() < Config.BASED_FARE) {
+			double requirement = Config.BASED_FARE - card.getBalance();
+			return "Card's balance is too low. Please recharge: " + requirement;
+		}
 		if (historyGW.getLastHistoryByCertificateId(certificateId).getStatus() != Config.UNUSED) {
 			return "You can't enter the station with this card. Probably stolen card.";
 		}

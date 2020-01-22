@@ -1,13 +1,15 @@
 package db;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class HistorySaver implements interactor.HistorySaver{
+import interactor.HistorySaverInterface;
+
+public class HistorySaver implements HistorySaverInterface{
 
 	@Override
 	public void updateEmbarkingStation(String id, int stationId) throws ClassNotFoundException, SQLException {
@@ -40,27 +42,10 @@ public class HistorySaver implements interactor.HistorySaver{
 	}
 	
 	public void createNewHistorySlot(String id) throws ClassNotFoundException, SQLException {
-		if(getTypeById(id) != Config.ONEWAY_TYPE) {
-			Connection connection = ConnectToMySQL.getInformation("transaction_history");
-			Statement statement = connection.createStatement();
-			String sql = "INSERT INTO `transactions` (certificateID, status) VALUES('" + id + "', '0');";
-			statement.executeUpdate(sql);
-			connection.close();			
-		}
-	}
-	
-	private int getTypeById(String certificateId) throws ClassNotFoundException, SQLException {
-		Connection connection = ConnectToMySQL.getInformation("travelling_certificate");
+		Connection connection = ConnectToMySQL.getInformation("transaction_history");
 		Statement statement = connection.createStatement();
-		String sql = "Select * from certificate_info WHERE id='" + certificateId +"'";
-		ResultSet rs = statement.executeQuery(sql);
-		int result = 0;
-		if (rs != null) {
-			while(rs.next()) {
-				result = rs.getInt(2);
-			}
-		}
+		String sql = "INSERT INTO `transactions` (certificateID, status) VALUES('" + id + "', '0');";
+		statement.executeUpdate(sql);
 		connection.close();
-		return result;
 	}
 }

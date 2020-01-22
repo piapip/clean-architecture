@@ -19,7 +19,7 @@ public class PrepaidCardUpdater implements TicketUpdater{
 		// TODO Auto-generated method stub
 		Connection connection = ConnectToMySQL.getInformation("travelling_certificate");
 		Statement statement = connection.createStatement();
-		double newBalance = getBalance(certificateId)-fee;
+		double newBalance = getBalance(certificateId) - fee;
 		String sql = "UPDATE prepaid_card SET balance=\"" + newBalance +"\" WHERE id=\"" + certificateId + "\"";
 		statement.executeUpdate(sql);
 		connection.close();
