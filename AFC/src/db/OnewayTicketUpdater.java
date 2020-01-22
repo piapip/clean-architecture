@@ -4,19 +4,26 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import certificate.Certificate;
-import certificate.OnewayTicket;
 import interactor.TicketUpdater;
 
 public class OnewayTicketUpdater implements TicketUpdater{
 
 	@Override
-	public void updateCertificate(String id, Certificate newCertificate) throws ClassNotFoundException, SQLException {
+	public void updateCertificateEnter(String id) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		OnewayTicket newTicket = (OnewayTicket) newCertificate;
 		Connection connection = ConnectToMySQL.getInformation("travelling_certificate");
 		Statement statement = connection.createStatement();
-		String sql = "UPDATE oneway_ticket SET status=" + newTicket.getStatus() + " WHERE id=\"" + newTicket.getID() + "\"";
+		String sql = "UPDATE oneway_ticket SET status=" + Config.PENDING + " WHERE id=\"" + id + "\"";
+		statement.executeUpdate(sql);
+		connection.close();
+	}
+
+	@Override
+	public void updateCertificateExit(String id, double fee) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		Connection connection = ConnectToMySQL.getInformation("travelling_certificate");
+		Statement statement = connection.createStatement();
+		String sql = "UPDATE oneway_ticket SET status=" + Config.EXPIRED + " WHERE id=\"" + id + "\"";
 		statement.executeUpdate(sql);
 		connection.close();
 	}	

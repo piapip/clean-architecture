@@ -4,21 +4,24 @@ import java.sql.SQLException;
 
 import certificate.PrepaidCard;
 import certificate.TicketDBGateway;
+import history.HistoryDBGateway;
 import interactor.RequirementInterface;
 
 public class RequirementPrepaidCard implements RequirementInterface {
 
-	private TicketDBGateway gw;
+	private TicketDBGateway cardGateWay;
+	private HistoryDBGateway historyGW;
 	
-	public RequirementPrepaidCard(TicketDBGateway mapper) {
-		this.gw = mapper;
+	public RequirementPrepaidCard(TicketDBGateway cardMapper, HistoryDBGateway historyMapper) {
+		this.cardGateWay = cardMapper;
+		this.historyGW = historyMapper;
 	}
 	
 	@Override
 	public String passEntering(String certificateId) throws ClassNotFoundException, SQLException {
-		PrepaidCard card = (PrepaidCard) gw.getCertificateById(certificateId);
+		PrepaidCard card = (PrepaidCard) cardGateWay.getCertificateById(certificateId);
 		if (card == null) return "Card doesn't exist. Please buy a new one.";
-		if (card.getLastHistory().getStatus() != Config.UNUSED) {
+		if (historyGW.getLastHistoryByCertificateId(certificateId).getStatus() != Config.UNUSED) {
 			return "You can't enter the station with this card. Probably stolen card.";
 		}
 		return null;
@@ -26,9 +29,9 @@ public class RequirementPrepaidCard implements RequirementInterface {
 
 	@Override
 	public String passExiting(String certificateId, double fee) throws ClassNotFoundException, SQLException {
-		PrepaidCard card = (PrepaidCard) gw.getCertificateById(certificateId);
+		PrepaidCard card = (PrepaidCard) cardGateWay.getCertificateById(certificateId);
 		if (card == null) return "Card doesn't exist. Please buy a new one.";
-		if (card.getLastHistory().getStatus() != Config.PENDING) {
+		if (historyGW.getLastHistoryByCertificateId(certificateId).getStatus() != Config.PENDING) {
 			return "You can't enter the station with this card. Probably stolen card.";
 		}
 		if (card.getBalance() < fee) {

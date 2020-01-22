@@ -3,12 +3,10 @@ package certificate;
 public abstract class Certificate {
 	private String id;
 	private int type;
-	LastHistory lastHistory;
 	
-	public Certificate(String id, int type, LastHistory history) {
+	public Certificate(String id, int type) {
 		this.id = id;
 		this.type = type;
-		this.lastHistory = history;
 	}	
 	
 	public String getID() {
@@ -17,10 +15,6 @@ public abstract class Certificate {
 	
 	public int getType() {
 		return this.type;
-	}
-	
-	public LastHistory getLastHistory() {
-		return this.lastHistory;
 	}
 	
 	public String toString() {

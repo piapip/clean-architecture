@@ -24,8 +24,7 @@ public class PrepaidCardDataMapper implements TicketDBGateway{
 					System.out.println("This is not a prepaid card!");
 					return null;
 				}
-				HistoryDataMapper historyMapper = new HistoryDataMapper();
-				result = new PrepaidCard(id, historyMapper.getLastHistoryByCertificateId(id), getBalance(id));
+				result = new PrepaidCard(id, getBalance(id));
 			}
 		}
 		connection.close();

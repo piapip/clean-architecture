@@ -24,9 +24,7 @@ public class OnewayTicketDataMapper implements TicketDBGateway {
 					System.out.println("This is not an oneway ticket!");
 					return null;
 				}
-				HistoryDataMapper historyMapper = new HistoryDataMapper();
-				result = new OnewayTicket(id, 
-						historyMapper.getLastHistoryByCertificateId(id), 
+				result = new OnewayTicket(id,
 						getStatus(id), 
 						getStartingStation(id), 
 						getEndingStation(id), 

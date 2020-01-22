@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import controller.Controller;
+import db.HistoryDataMapper;
 import db.HistorySaver;
 import db.OnewayTicketDataMapper;
 import db.OnewayTicketUpdater;
@@ -36,10 +37,10 @@ public class Main {
 			} while(stationId > 9 || stationId < 1);
 			
 			do {
-				System.out.println("Enter (0) or Exit(1): ");
+				System.out.println("Enter or Exit?:\n1. Enter\n2. Exit ");
 				enterOrExit = reader.nextInt();
 				reader.nextLine();
-			} while(enterOrExit > 1 || enterOrExit < 0);
+			} while(enterOrExit > 2 || enterOrExit < 1);
 			
 			do {
 				System.out.println("What are you using?:\n1. Card\n2. Ticket");
@@ -47,18 +48,20 @@ public class Main {
 				reader.nextLine();
 			} while(scanOption > 2 || scanOption < 1);
 			
-			if(scanOption == 1) 
+			if(scanOption == 2) 
 				controller = new Controller(
-						new RequirementOnewayTicket(new OnewayTicketDataMapper()), 
+						new RequirementOnewayTicket(new OnewayTicketDataMapper(), new HistoryDataMapper()), 
 						new OnewayTicketUpdater(), 
 						new StationDistanceByDistance(new StationDataMapper()), 
-						new HistorySaver());
+						new HistorySaver(),
+						new HistoryDataMapper());
 			else 
 				controller = new Controller(
-						new RequirementPrepaidCard(new PrepaidCardDataMapper()), 
+						new RequirementPrepaidCard(new PrepaidCardDataMapper(), new HistoryDataMapper()), 
 						new PrepaidCardUpdater(), 
 						new StationDistanceByDistance(new StationDataMapper()), 
-						new HistorySaver());
+						new HistorySaver(),
+						new HistoryDataMapper());
 			
 			System.out.println("Please enter your barcode: ");
 			String barCode = reader.nextLine();
@@ -73,7 +76,7 @@ public class Main {
 				certificateId = ticketRecognizer.process(barCode);
 			}
 			
-			if(enterOrExit == 0) error = controller.enter(certificateId, stationId);
+			if(enterOrExit == 1) error = controller.enter(certificateId, stationId);
 			else error = controller.exit(certificateId, stationId);
 			
 			if(error == null) {

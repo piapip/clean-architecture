@@ -1,6 +1,6 @@
-package certificate;
+package history;
 
-public class LastHistory {
+public class History {
 	private int id;
 	private String certificateId;
 	private int status;
@@ -9,7 +9,7 @@ public class LastHistory {
 	private int embarkingStationID;
 	private int endingStationID;
 	
-	public LastHistory(int id, String certificateId, int status, String dayIn, String dayOut, int embarkingStationID, int endingStationID) {
+	public History(int id, String certificateId, int status, String dayIn, String dayOut, int embarkingStationID, int endingStationID) {
 		this.id = id;
 		this.certificateId = certificateId;
 		this.status = status;

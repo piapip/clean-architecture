@@ -5,17 +5,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import certificate.LastHistory;
+import history.History;
+import history.HistoryDBGateway;
 
-public class HistoryDataMapper {
+public class HistoryDataMapper implements HistoryDBGateway {
 	
-	protected LastHistory getLastHistoryByCertificateId(String id) throws SQLException, ClassNotFoundException {
+	public History getLastHistoryByCertificateId(String id) throws SQLException, ClassNotFoundException {
 		Connection connection = ConnectToMySQL.getInformation("transaction_history");
 		Statement statement = connection.createStatement();
 		String sql = "Select * from transactions WHERE certificateId='" + id + "' ORDER BY status ASC  \r\n" + 
 				"LIMIT 1";
 		ResultSet rs = statement.executeQuery(sql);
-		LastHistory result = null;
+		History result = null;
 		if (rs != null) {
 			while(rs.next()) {
 				int historyId = rs.getInt(1);
@@ -24,7 +25,7 @@ public class HistoryDataMapper {
 				String dayOut = rs.getDate(5) + " " + rs.getTime(5); 
 				int embarkingStationID = rs.getInt(6);
 				int endingStationID = rs.getInt(7);	
-				result = new LastHistory(historyId, id, status, dayIn, dayOut, embarkingStationID, endingStationID);
+				result = new History(historyId, id, status, dayIn, dayOut, embarkingStationID, endingStationID);
 			}			
 		}
 		connection.close();

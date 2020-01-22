@@ -1,29 +1,42 @@
 package db;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import certificate.Certificate;
-import certificate.PrepaidCard;
 import interactor.TicketUpdater;
 
 public class PrepaidCardUpdater implements TicketUpdater{
 
 	@Override
-	public void updateCertificate(String id, Certificate newCertificate) throws ClassNotFoundException, SQLException {
+	public void updateCertificateEnter(String id) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-//		PrepaidCardDataMapper mapper = new PrepaidCardDataMapper();
-//		PrepaidCard oldCard = mapper.getCertificateById(id);
-//		if(oldCard.getID() != id) {
-//			System.out.println("Can't update the card like this.");
-//			return;
-//		}
-		PrepaidCard newCard = (PrepaidCard) newCertificate;
+	}
+
+	@Override
+	public void updateCertificateExit(String certificateId, double fee) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
 		Connection connection = ConnectToMySQL.getInformation("travelling_certificate");
 		Statement statement = connection.createStatement();
-		String sql = "UPDATE prepaid_card SET balance=\"" + newCard.getBalance()+"\" WHERE id=\"" + newCard.getID()+ "\"";
+		double newBalance = getBalance(certificateId)-fee;
+		String sql = "UPDATE prepaid_card SET balance=\"" + newBalance +"\" WHERE id=\"" + certificateId + "\"";
 		statement.executeUpdate(sql);
 		connection.close();
 	}	
+	
+	private double getBalance(String certificateId) throws ClassNotFoundException, SQLException {
+		Connection connection = ConnectToMySQL.getInformation("travelling_certificate");
+		Statement statement = connection.createStatement();
+		String sql = "Select * from prepaid_card WHERE id='" + certificateId + "'";
+		ResultSet rs = statement.executeQuery(sql);
+		double result = 0;
+		if(rs != null) {
+			while(rs.next()){
+				result = rs.getDouble(2);
+			}
+		}
+		connection.close();
+		return result;
+	}
 }

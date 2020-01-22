@@ -2,8 +2,7 @@ package interactor;
 
 import java.sql.SQLException;
 
-import certificate.Certificate;
-
 public interface TicketUpdater {
-	public void updateCertificate(String id, Certificate newCertificate) throws ClassNotFoundException, SQLException;
+	public void updateCertificateEnter(String certificateId) throws ClassNotFoundException, SQLException;
+	public void updateCertificateExit(String certificateId, double fee) throws ClassNotFoundException, SQLException;
 }
