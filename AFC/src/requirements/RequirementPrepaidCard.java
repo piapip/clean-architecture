@@ -1,7 +1,9 @@
-package certificate;
+package requirements;
 
 import java.sql.SQLException;
 
+import certificate.PrepaidCard;
+import certificate.TicketDBGateway;
 import interactor.RequirementInterface;
 
 public class RequirementPrepaidCard implements RequirementInterface {

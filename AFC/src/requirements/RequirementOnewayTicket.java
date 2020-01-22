@@ -1,7 +1,9 @@
-package certificate;
+package requirements;
 
 import java.sql.SQLException;
 
+import certificate.OnewayTicket;
+import certificate.TicketDBGateway;
 import interactor.RequirementInterface;
 
 public class RequirementOnewayTicket implements RequirementInterface{
