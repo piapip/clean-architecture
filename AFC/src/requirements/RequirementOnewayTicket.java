@@ -11,6 +11,7 @@ public class RequirementOnewayTicket implements RequirementInterface{
 
 	private TicketDBGateway ticketGW;
 	private HistoryDBGateway historyGW;
+	//	this one left me wondering... shouldn't I specify this initiator already here, the book said that I mustn't do that
 	public RequirementOnewayTicket(TicketDBGateway ticketMapper, HistoryDBGateway historyMapper) {
 		this.ticketGW = ticketMapper;
 		this.historyGW = historyMapper;

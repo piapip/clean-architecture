@@ -7,7 +7,7 @@ import interactor.StationDistanceInterface;
 public class StationDistanceByZone implements StationDistanceInterface{
 
 	private StationDBGateway gw;
-	
+	//	this one left me wondering... shouldn't I specify this initiator already here, the book said that I mustn't do that
 	public StationDistanceByZone(StationDBGateway gw) {
 		this.gw = gw;
 	}
