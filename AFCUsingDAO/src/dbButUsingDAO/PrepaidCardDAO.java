@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
 
+import certificate.Dao;
 import certificate.PrepaidCard;
 
 public class PrepaidCardDAO implements Dao<PrepaidCard> {

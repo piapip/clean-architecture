@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
 
+import history.Dao;
 import history.History;
 
 public class HistoryDataDAO implements Dao<History>{
@@ -63,6 +64,7 @@ public class HistoryDataDAO implements Dao<History>{
 		connection.close();
 	}
 	
+	@Override
 	public void createNewHistorySlot(String certificateId) throws ClassNotFoundException, SQLException {
 		Connection connection = ConnectToMySQL.getInformation("transaction_history");
 		Statement statement = connection.createStatement();

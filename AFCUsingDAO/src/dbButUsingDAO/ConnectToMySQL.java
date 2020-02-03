@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import db.Config;
-
 public class ConnectToMySQL {
 	protected static Connection getInformation(String dbName) throws SQLException, ClassNotFoundException {
 		String hostName = "localhost";

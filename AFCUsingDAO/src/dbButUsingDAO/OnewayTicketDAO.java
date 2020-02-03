@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.Optional;
 
 import certificate.OnewayTicket;
+import certificate.Dao;
 
 public class OnewayTicketDAO implements Dao<OnewayTicket> {
 
