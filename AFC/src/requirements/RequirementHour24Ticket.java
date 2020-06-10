@@ -24,7 +24,8 @@ public class RequirementHour24Ticket implements RequirementInterface{
 		if(ticket.getStatus() == Config.EXPIRED) {
 			return "The ticket is already used.";
 		}
-		if(historyGW.getLastHistoryByCertificateId(certificateId).getStatus() != Config.UNUSED) {
+		if(historyGW.getLastHistoryByCertificateId(certificateId).getStatus() != Config.UNUSED || 
+				historyGW.getLastHistoryByCertificateId(certificateId).getStatus() != Config.SUCCESSFUL) {
 			return "You can't enter the station with this ticket.";
 		}
 		return null;
