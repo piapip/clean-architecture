@@ -26,8 +26,8 @@ public class Hour24Ticket extends Certificate{
 	}
 	
 	public boolean isExpired() {
-		if((this.getActiveTime()).compareTo(this.getExpiredTime())==-1) return true;
-		return false;
+		if((this.getActiveTime()).compareTo(this.getExpiredTime())==-1) return false;
+		return true;
 	}
 }
 
