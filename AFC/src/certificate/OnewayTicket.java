@@ -7,8 +7,8 @@ public class OnewayTicket extends Certificate {
 	private int endingStation;
 	private double fare;
 	
-	public OnewayTicket(String onewayId, int status, int startingStation, int endingStation, double fare) {
-		super(onewayId, Config.ONEWAY_TYPE);
+	public OnewayTicket(String onewayId, int is_VIP, int status, int startingStation, int endingStation, double fare) {
+		super(onewayId, Config.ONEWAY_TYPE, is_VIP);
 		this.status = status;
 		this.startingStation = startingStation;
 		this.endingStation = endingStation;

@@ -6,6 +6,8 @@ import java.util.Scanner;
 import controller.Controller;
 import db.HistoryDataMapper;
 import db.HistorySaver;
+import db.Hour24TicketDataMapper;
+import db.Hour24TicketUpdater;
 import db.OnewayTicketDataMapper;
 import db.OnewayTicketUpdater;
 import db.PrepaidCardDataMapper;
@@ -15,6 +17,7 @@ import hust.soict.se.customexception.InvalidIDException;
 import hust.soict.se.gate.Gate;
 import hust.soict.se.recognizer.TicketRecognizer;
 import hust.soict.se.scanner.CardScanner;
+import requirements.RequirementHour24Ticket;
 import requirements.RequirementOnewayTicket;
 import requirements.RequirementPrepaidCard;
 import station.StationDistanceByDistance;
@@ -43,16 +46,23 @@ public class Main {
 			} while(enterOrExit > 2 || enterOrExit < 1);
 			
 			do {
-				System.out.println("What are you using?:\n1. Card\n2. Ticket");
+				System.out.println("What are you using?:\n1. Card\n2. One way Ticket\n3.24-hour Ticket");
 				scanOption = reader.nextInt();
 				reader.nextLine();
-			} while(scanOption > 2 || scanOption < 1);
+			} while(scanOption > 3 || scanOption < 1);
 			
 			if(scanOption == 2) 
 				controller = new Controller(
 						new RequirementOnewayTicket(new OnewayTicketDataMapper(), new HistoryDataMapper()), 
 						new OnewayTicketUpdater(), 
 						new StationDistanceByDistance(new StationDataMapper()), 
+						new HistorySaver(),
+						new HistoryDataMapper());
+			else if (scanOption == 3) 
+				controller = new Controller(
+						new RequirementHour24Ticket(new Hour24TicketDataMapper(), new HistoryDataMapper()),
+						new Hour24TicketUpdater(),
+						new StationDistanceByDistance(new StationDataMapper()),
 						new HistorySaver(),
 						new HistoryDataMapper());
 			else 

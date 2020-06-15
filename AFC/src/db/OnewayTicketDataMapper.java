@@ -20,11 +20,13 @@ public class OnewayTicketDataMapper implements TicketDBGateway {
 		if (rs != null) {
 			while(rs.next()) {
 				int type = rs.getInt(2);
+				int is_VIP = rs.getInt(3);
 				if (type != Config.ONEWAY_TYPE) {
 					System.out.println("This is not an oneway ticket!");
 					return null;
 				}
 				result = new OnewayTicket(id,
+						is_VIP,
 						getStatus(id), 
 						getStartingStation(id), 
 						getEndingStation(id), 

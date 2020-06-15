@@ -8,24 +8,25 @@ SET character_set_client = utf8mb4 ;
 CREATE TABLE `certificate_info` (
 	`id` varChar(16) NOT NULL,
     `type` int NOT NULL,
+    `is_VIP` tinyint(3) NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- For prepaid card 
-INSERT INTO `certificate_info` VALUES('9ac2197d9258257b', '3');
-INSERT INTO `certificate_info` VALUES('c34ab6abb7b2bb59', '3');
-INSERT INTO `certificate_info` VALUES('2f858775d71cc4ec', '3');
-INSERT INTO `certificate_info` VALUES('acea9bbeb39f5ff3', '3');
+INSERT INTO `certificate_info` VALUES('9ac2197d9258257b', '3', 0);
+INSERT INTO `certificate_info` VALUES('c34ab6abb7b2bb59', '3', 0);
+INSERT INTO `certificate_info` VALUES('2f858775d71cc4ec', '3', 1);
+INSERT INTO `certificate_info` VALUES('acea9bbeb39f5ff3', '3', 0);
 
 -- For oneway ticket 
-INSERT INTO `certificate_info` VALUES('e8dc4081b13434b4', '1');
-INSERT INTO `certificate_info` VALUES('7885fd6de6fc9a36', '1');
-INSERT INTO `certificate_info` VALUES('50221250d5a5d20c', '1');
+INSERT INTO `certificate_info` VALUES('e8dc4081b13434b4', '1', 0);
+INSERT INTO `certificate_info` VALUES('7885fd6de6fc9a36', '1', 0);
+INSERT INTO `certificate_info` VALUES('50221250d5a5d20c', '1', 0);
 
 -- For hour24 ticket
-INSERT INTO `certificate_info` VALUES('07c84c6c4ba59f88', '2');
-INSERT INTO `certificate_info` VALUES('45fcaeafd8ebec14', '2');
-INSERT INTO `certificate_info` VALUES('bab1246b02772bb0', '2');
+INSERT INTO `certificate_info` VALUES('07c84c6c4ba59f88', '2', 0);
+INSERT INTO `certificate_info` VALUES('45fcaeafd8ebec14', '2', 0);
+INSERT INTO `certificate_info` VALUES('bab1246b02772bb0', '2', 0);
 
 CREATE TABLE `prepaid_card` (
 	`id` varChar(16) NOT NULL,

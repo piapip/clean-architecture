@@ -34,7 +34,3 @@ INSERT INTO `transactions` VALUES('6', '50221250d5a5d20c', '2', '2019-11-08 17:1
 -- For 24hour ticket
 INSERT INTO `transactions` VALUES('8','07c84c6c4ba59f88', '0',null,null,null,null); -- ijklmnop 
 INSERT INTO `transactions` VALUES('9','45fcaeafd8ebec14', '1','2019-11-25 12:17:17',null,'2',null); -- tttttttt
-
-
-
-

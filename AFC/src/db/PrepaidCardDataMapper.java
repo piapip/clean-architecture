@@ -20,11 +20,12 @@ public class PrepaidCardDataMapper implements TicketDBGateway{
 		if (rs != null) {
 			while(rs.next()) {
 				int type = rs.getInt(2);
+				int is_VIP = rs.getInt(3);
 				if (type != Config.PREPAID_TYPE) {
 					System.out.println("This is not a prepaid card!");
 					return null;
 				}
-				result = new PrepaidCard(id, getBalance(id));
+				result = new PrepaidCard(id, is_VIP, getBalance(id));
 			}
 		}
 		connection.close();

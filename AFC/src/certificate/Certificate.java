@@ -3,10 +3,12 @@ package certificate;
 public abstract class Certificate {
 	private String id;
 	private int type;
+	private int is_VIP;
 	
-	public Certificate(String id, int type) {
+	public Certificate(String id, int type, int is_VIP) {
 		this.id = id;
 		this.type = type;
+		this.is_VIP = is_VIP;
 	}	
 	
 	public String getID() {
@@ -15,6 +17,10 @@ public abstract class Certificate {
 	
 	public int getType() {
 		return this.type;
+	}
+	
+	public boolean isVIP() {
+		return this.is_VIP == Config.IS_VIP;
 	}
 	
 	public String toString() {

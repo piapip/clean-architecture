@@ -6,8 +6,8 @@ public class Hour24Ticket extends Certificate{
 	private String activeTime;
 	private String expiredTime;
 	
-	public Hour24Ticket(String id, int status, String activeTime, String expiredTime) {
-		super(id, Config.HOUR24_TYPE);
+	public Hour24Ticket(String id, int is_VIP, int status, String activeTime, String expiredTime) {
+		super(id, Config.HOUR24_TYPE, is_VIP);
 		this.status = status;
 		this.activeTime=activeTime;
 		this.expiredTime=expiredTime;
